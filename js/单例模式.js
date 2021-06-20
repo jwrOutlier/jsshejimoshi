@@ -23,8 +23,11 @@ class SingleObj{
         SingleObj.instance.__proto__ = SingleObj.prototype
         return SingleObj.instance
     }
+    showMessage(){
+        console.log('diayongle');
+    }
 }
 
 const instance = SingleObj.getInstance();
 console.log(instance);
-// instance.showMessage();
+instance.showMessage();
