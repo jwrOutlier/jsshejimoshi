@@ -70,7 +70,7 @@ class Meal {
         // 用来存储套餐中不同的食品
         const items = [];
         // 判断items是否是私有的
-        Reflect.defineProperty(this, 'item', {
+        Reflect.defineProperty(this, 'items', {
             get: () => {
                 if (this.__proto__ !== Meal.prototype) {
                     throw new Error('items is private')
@@ -81,19 +81,19 @@ class Meal {
     }
     // 向这个套餐添加食品
     addItem(item) {
-        this[this.itemName].push(item);
+        this.items.push(item);
     }
     // 获取套餐价格
     getCost() {
         let cost = 0.0;
-        for (const item of this[this.itemName]) {
+        for (const item of this.items) {
             cost += item.price()
         }
         return cost
     }
     // 展示食品名字，价格，容器
     showItems() {
-        for (const item of this[this.itemName]) {
+        for (const item of this.items) {
             const nameStr = 'item' + item.name();
             const packStr = 'packing' + item.packing().pack();
             const priceStr = "price" + item.price();
