@@ -17,10 +17,10 @@ class Burger {
     }
 }
 
-// 冷饮需要使用瓶子来装
-class ColorDrink {
+// 冷饮需要瓶子装
+class ColdDrink {
     packing() {
-        return new Bottle()
+        return new Bottle();
     }
 }
 
@@ -67,7 +67,9 @@ class Pepsi extends ColdDrink {
 // 创建套餐类
 class Meal {
     constructor() {
+        // 用来存储套餐中不同的食品
         const items = [];
+        // 判断items是否是私有的
         Reflect.defineProperty(this, 'item', {
             get: () => {
                 if (this.__proto__ !== Meal.prototype) {
@@ -77,9 +79,11 @@ class Meal {
             }
         })
     }
+    // 向这个套餐添加食品
     addItem(item) {
         this[this.itemName].push(item);
     }
+    // 获取套餐价格
     getCost() {
         let cost = 0.0;
         for (const item of this[this.itemName]) {
@@ -87,6 +91,7 @@ class Meal {
         }
         return cost
     }
+    // 展示食品名字，价格，容器
     showItems() {
         for (const item of this[this.itemName]) {
             const nameStr = 'item' + item.name();
@@ -100,6 +105,7 @@ class Meal {
 // 套餐建造者
 class MealBuilder {
     prepareVegMeal() {
+        // 创建套餐 套餐中添加蔬菜汉堡和可乐
         const meal = new Meal();
         meal.addItem(new VegBurger());
         meal.addItem(new Coke());
